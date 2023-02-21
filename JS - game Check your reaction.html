@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Check your reaction</title>
+</head>
+
+<body>
+
+  <style>
+    #shape {
+      display: block;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: relative;
+    }
+
+    .timer {
+      font-weight: bold;
+    }
+  </style>
+
+
+  <h1>Check your reaction</h1>
+
+  <p>Click on a shape as fast as you can!</p>
+
+  <p class="timer">Your time: <span id="timer"></span></p>
+
+  <p>Best time: <span id="besttimer"></span></p>
+
+  <div id="shape"></div>
+
+
+  <script>
+
+    function getRandomColor() {
+
+      return "#" + parseInt(Math.random() * 0xffffff).toString(16);
+
+    };
+
+    function makeShape() {
+
+      let size = (Math.random() * 200) + 100;
+      let move = Math.random() * 400;
+
+      if (Math.random() < 0.5) {
+
+        document.getElementById("shape").style.borderRadius = "50%";
+
+      } else {
+
+        document.getElementById("shape").style.borderRadius = "0";
+
+      }
+
+      document.getElementById("shape").style.backgroundColor = getRandomColor();
+      document.getElementById("shape").style.width = size + "px";
+      document.getElementById("shape").style.height = size + "px";
+      document.getElementById("shape").style.top = move + "px";
+      document.getElementById("shape").style.left = move + "px";
+      document.getElementById("shape").style.display = "block";
+
+      startTime = new Date().getTime();
+
+    };
+
+    function appearAfterDelay() {
+
+      setTimeout(makeShape, Math.random() * 3000);
+
+    };
+
+    let bestTime = 1;
+
+    appearAfterDelay();
+
+    let startTime = new Date().getTime();
+
+    document.getElementById('shape').onclick = function () {
+
+      let endTime = new Date().getTime();
+
+      document.getElementById('shape').style.display = "none";
+
+      let resultTime = (endTime - startTime) / 1000;
+
+      document.getElementById('timer').innerHTML = resultTime + " s";
+
+      if (resultTime < bestTime) {
+
+        bestTime = resultTime;
+
+        document.getElementById('besttimer').innerHTML = bestTime + " s";
+
+      } else {
+
+        bestTime = bestTime;
+
+        document.getElementById('besttimer').innerHTML = bestTime + " s";
+
+      }
+
+      appearAfterDelay();
+
+    };
+
+  </script>
+
+</body>
+
+</html>
