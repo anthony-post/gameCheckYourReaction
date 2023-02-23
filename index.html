@@ -11,6 +11,18 @@
 <body>
 
   <style>
+    .title {
+      color: burlywood;
+    }
+
+    .timer {
+      font-weight: bold;
+    }
+
+    .besttimer {
+      color: darkorange;
+    }
+
     #shape {
       display: block;
       width: 200px;
@@ -18,20 +30,16 @@
       background-color: red;
       position: relative;
     }
-
-    .timer {
-      font-weight: bold;
-    }
   </style>
 
 
-  <h1>Check your reaction</h1>
+  <h1 class="title">Check your reaction</h1>
 
   <p>Click on a shape as fast as you can!</p>
 
   <p class="timer">Your time: <span id="timer"></span></p>
 
-  <p>Best time: <span id="besttimer"></span></p>
+  <p class="besttimer">Best time: <span id="besttimer"></span></p>
 
   <div id="shape"></div>
 
@@ -46,17 +54,22 @@
 
     function makeShape() {
 
-      let size = (Math.random() * 200) + 100;
-      let move = Math.random() * 400;
+      const mobileWidth = 767;
+      let size = 0;
+      let move = 0;
+
+      if (window.innerWidth < mobileWidth) {
+        size = (Math.random() * 100) + 50;
+        move = Math.random() * 200;
+      } else {
+        size = (Math.random() * 200) + 100;
+        move = Math.random() * 400;
+      }
 
       if (Math.random() < 0.5) {
-
         document.getElementById("shape").style.borderRadius = "50%";
-
       } else {
-
         document.getElementById("shape").style.borderRadius = "0";
-
       }
 
       document.getElementById("shape").style.backgroundColor = getRandomColor();
